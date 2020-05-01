@@ -27,7 +27,7 @@ public class TestLeafApp {
 		
 		ad.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
-		ad.findElementByXPath("(//android.widget.EditText)[1]").sendKeys("sakthivel@testleaf.com");
+		/*ad.findElementByXPath("(//android.widget.EditText)[1]").sendKeys("sakthivel@testleaf.com");
 		
 		Thread.sleep(2000);
 		
@@ -35,11 +35,26 @@ public class TestLeafApp {
 		
 		Thread.sleep(2000);
 		
-		ad.findElementByXPath("//android.widget.Button").click();
+		ad.findElementByXPath("//android.widget.Button").click();*/
 		
 		Set<String> allCh = ad.getContextHandles();
 		
 		System.out.println(allCh);
+		
+		for (String each : allCh) {
+			
+			ad.context(each);
+			
+		}
+		
+		System.out.println(ad.getContext());
+		
+		ad.findElementByXPath("//input[@placeholder='Email']").sendKeys("sakthivel@testleaf.com");
+		
+		ad.findElementByXPath("//input[@placeholder='Password']").sendKeys("Leaf@123");
+		
+		ad.findElementByXPath("//span[text()='Login']").click();
+		
 	}
 
 }
