@@ -2,6 +2,7 @@ package Basic;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebElement;
@@ -14,11 +15,11 @@ public class TestLeafApp {
 	public static void main(String[] args) throws MalformedURLException, InterruptedException{
 		
 		DesiredCapabilities dc =new DesiredCapabilities();
-		dc.setCapability("appPackage", "com.google.android.apps.messaging");
-		dc.setCapability("appActivity", "com.google.android.apps.messaging.ui.ConversationListActivity");
-		dc.setCapability("deviceName", "Emulator");
+		//dc.setCapability("app", "C:\\Users\\dell\\Desktop\\Appium\\leaforg.apk");
+		dc.setCapability("appPackage", "com.testleaf.leaforg");
+		dc.setCapability("appActivity", "com.testleaf.leaforg.MainActivity");
+		dc.setCapability("deviceName", "OnePlus 7T");
 		dc.setCapability("platformName", "Android");
-		dc.setCapability("platformVersion", "9.0");
 		dc.setCapability("automationName", "UiAutomator1");
 		dc.setCapability("noReset", true);
 		
@@ -26,15 +27,19 @@ public class TestLeafApp {
 		
 		ad.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
-		ad.findElementById("com.google.android.apps.messaging:id/action_search").click();
+		ad.findElementByXPath("(//android.widget.EditText)[1]").sendKeys("sakthivel@testleaf.com");
 		
 		Thread.sleep(2000);
 		
-		ad.findElementById("com.google.android.apps.messaging:id/search_src_text").clear();
+		ad.findElementByXPath("(//android.widget.EditText)[2]").sendKeys("Leaf@123");
 		
 		Thread.sleep(2000);
 		
-		ad.findElementById("com.google.android.apps.messaging:id/search_src_text").sendKeys("APPIUM APRIL WD 2020");
+		ad.findElementByXPath("//android.widget.Button").click();
+		
+		Set<String> allCh = ad.getContextHandles();
+		
+		System.out.println(allCh);
 	}
 
 }
